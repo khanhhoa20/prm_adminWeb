@@ -15,7 +15,7 @@ fetch('share/dashboard.html')
         var sidebar = doc.querySelector('.sidebar');
 
         document.getElementById("sidebar").append(sidebar);
-
+        
         console.log(sidebar);
 
         console.log(doc);
