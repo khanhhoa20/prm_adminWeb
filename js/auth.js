@@ -2,12 +2,13 @@
 class Auth {
 	constructor() {
         document.querySelector("body").style.display = "none";
-		const status = sessionStorage.getItem("status");
-		this.validateAuth(status);
+		const role = sessionStorage.getItem("role");
+		console.log()
+		this.validateAuth(role);
 	}
 
-	validateAuth(status) {
-		if (status != 1) {
+	validateAuth(role) {
+		if (role != "ad") {
 			window.location.replace("/login.html");
 		} else {
             document.querySelector("body").style.display = "block";
@@ -15,7 +16,7 @@ class Auth {
 	}
 
 	logOut() {
-		sessionStorage.removeItem("status");
+		sessionStorage.removeItem("role");
 		window.location.replace("/login.html");
 	}
 }

@@ -1,8 +1,8 @@
 function getDataFromAPI() {
-   
+
     console.log('email', document.getElementById('email').value);
     console.log('password', document.getElementById('password').value);
-    if (document.getElementById('email').value == '' || document.getElementById('password').value == '') { 
+    if (document.getElementById('email').value == '' || document.getElementById('password').value == '') {
         alert("Email/password not null");
     }
     else {
@@ -19,25 +19,31 @@ function getDataFromAPI() {
                 body: formData
             }
         )
-            .then(response => {
-                
-                response.json(),
-                    console.log('Status: ', response.status)
-                {
-                    if (response.status != 403) {
-                        window.location.assign("service.html");
-                        sessionStorage.setItem("status","1");
-                    
-                        // console.log('Status: ', response.status);
+            // .then(response => {
 
-                    }
-                    else {
-                        alert("Email/password not right");
+            //     // response.json();
 
-                    }
-                }
+            //     {
+            //         if (response.status == 200) {
+            //             window.location.assign("service.html");
+            //             sessionStorage.setItem("status","1");
+            //             // console.log(response.json);
+            //             // console.log('Status: ', response.status);
 
-            })
+            //         }
+            //         else {
+            //             alert("Email/password not right");
+
+            //         }
+            //     }
+
+            // })
+            .then(response => response.json())
+            .then(data => {
+                sessionStorage.setItem("token", data.token);
+                sessionStorage.setItem("role", data.roleID);
+                window.location.assign("service.html");
+            });
 
     }
 }
