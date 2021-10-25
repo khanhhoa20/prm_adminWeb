@@ -42,6 +42,8 @@ function getDataFromAPI() {
             .then(data => {
                 sessionStorage.setItem("token", data.token);
                 sessionStorage.setItem("role", data.roleID);
+                
+                sessionStorage.setItem("user",JSON.stringify(data));
                 window.location.assign("service.html");
             });
 
