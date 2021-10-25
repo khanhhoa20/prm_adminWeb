@@ -1,7 +1,8 @@
+
 class Auth {
 	constructor() {
         document.querySelector("body").style.display = "none";
-		const status = localStorage.getItem("status");
+		const status = sessionStorage.getItem("status");
 		this.validateAuth(status);
 	}
 
@@ -18,3 +19,8 @@ class Auth {
 		window.location.replace("/login.html");
 	}
 }
+const auth = new Auth();
+document.querySelector(".logout").addEventListener("click",
+    (e) => {
+        auth.logOut();
+    });

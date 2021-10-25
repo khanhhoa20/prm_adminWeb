@@ -11,7 +11,7 @@ function getDataFromAPI() {
         formData.append('empEmail', document.getElementById("email").value);
         formData.append('password', document.getElementById("password").value);
         // fetch('http://haircut-fall-2021.herokuapp.com/api/empLogin?empEmail=' + data.empEmail + '&password=' + data.password,
-        fetch('http://haircut-fall-2021.herokuapp.com/api/empLogin',
+        fetch('https://hair-cut.herokuapp.com/api/empLogin',
 
             {
                 method: "POST",
@@ -24,8 +24,8 @@ function getDataFromAPI() {
                 response.json(),
                     console.log('Status: ', response.status)
                 {
-                    if (response.status != 404) {
-                        window.location.assign("dashboard.html");
+                    if (response.status != 403) {
+                        window.location.assign("service.html");
                         sessionStorage.setItem("status","1");
                     
                         // console.log('Status: ', response.status);
