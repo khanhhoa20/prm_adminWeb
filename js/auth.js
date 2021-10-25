@@ -17,6 +17,7 @@ class Auth {
 
 	logOut() {
 		sessionStorage.removeItem("role");
+		sessionStorage.removeItem("user");
 		window.location.replace("/login.html");
 	}
 }

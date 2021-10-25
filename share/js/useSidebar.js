@@ -45,7 +45,7 @@ fetch('share/dashboard.html')
 
 
         console.log(document.querySelector(".logout"));
-        console.log(sidebar);
+        console.log(document);
 
         
         
