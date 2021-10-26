@@ -1,0 +1,22 @@
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 4 - 15px);
+    background: rgb(255, 255, 255);
+    padding: 15px 14px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+  .box-topic{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .box-topic a{
+    text-decoration: none;
+    color: #131211;
+}
+.home-content{
+    position: relative;
+    padding-left: 1%;
+  }
