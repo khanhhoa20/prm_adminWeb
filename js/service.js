@@ -1,36 +1,69 @@
-//giao diện phần sidebar
-// fetch('share/dashboard.html')
-//     .then(function(response) {
-//         // When the page is loaded convert it to text
-//         return response.text()
-//     })
-//     .then(function(html) {
-//         // Initialize the DOM parser
-//         var parser = new DOMParser();
+function start() {
+    getServices(renderServices);
+}
 
-//         // Parse the text
-//         var doc = parser.parseFromString(html, "text/html");
-
-//         // You can now even select part of that html as you would in the regular DOM 
-//         // Example:
-//         var sidebar = doc.querySelector('.sidebar');
-
-      
-//         document.getElementById("sidebar").append(sidebar);
-//         var script = document.createElement("script");  // create a script DOM node
-//         script.src = "js/auth.js";  // set its src to the provided URL
-    
-//         document.body.appendChild(script);  // add it to the end of the body section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+start();
 
 
+function getServices(callback) {
+    fetch('https://hair-cut.herokuapp.com/api/services',
 
-//         console.log(document.querySelector(".logout"));
-//         console.log(sidebar);
+        {
+            method: "get",
+            headers: {
 
-        
-        
-//     })
-//     .catch(function(err) {  
-//         console.log('Failed to fetch page: ', err);  
-//     });
+                Authorization: sessionStorage.getItem('token')
+
+            }
+
+        }
+    )
+        .then(response => response.json())
+
+        // Displaying results to console
+        .then(callback);
+}
+
+function renderServices(services) {
+    // console.log(services);
+    var body = document.getElementById('tableServices');
+    var htmls = services.map(function (service) {
+        return `
+        <tr>
+            <th scope="row">${service.serviceID}</th>
+            <td>${service.serviceName}</td>
+            <td>${service.durationTime}</td>
+            <td>${service.price}</td>
+            <td>${service.status}</td>
+            <td>${service.discount}</td>
+        </tr> 
+        `
+
+
+    });
+    // console.log(htmls);
+    body.innerHTML += htmls.join(' ');
+}
+
+// function getItem() {
+//     fetch('https://hair-cut.herokuapp.com/api/services',
+
+//         {
+//             method: "get",
+//             headers: {
+
+//                 Authorization: sessionStorage.getItem('token')
+
+//             }
+
+//         }
+//     )
+//         .then(response => response.json())
+
+//         // Displaying results to console
+//         .then(data => {
+//             console.log(data);
+
+//         });
+// }
 

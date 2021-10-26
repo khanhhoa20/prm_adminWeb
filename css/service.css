@@ -1,4 +1,4 @@
-.box{
+ .box{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,16 +7,30 @@
     padding: 15px 14px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-  }
+    margin-bottom: 3%;
+   
+  } 
+  
+ 
+
+
+
   .box-topic{
     font-size: 20px;
     font-weight: 500;
-  }
+  } 
   .box-topic a{
     text-decoration: none;
     color: #131211;
-}
+} 
 .home-content{
-    position: relative;
-    padding-left: 1%;
-  }
+  padding-left: 1%;
+  position: relative;
+} 
+
+.table-boxes .boxTable .title{
+  font-size: 22px;
+  font-weight: 500;
+  color: #131211;
+  /* margin-bottom: 10px; */
+}
