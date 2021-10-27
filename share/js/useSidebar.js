@@ -34,6 +34,19 @@ fetch('share/dashboard.html')
         //document.getElementById('chooseService').classList.add('active'); 
         //màu cam chọn xuất hiện :v
         // }
+        if (window.location.href.includes("schedule")){
+            document.querySelector(".active").classList.remove("active");
+            document.getElementById('chooseSchedule').classList.add('active');
+        }
+
+        if (window.location.href.includes("employee")){
+            document.querySelector(".active").classList.remove("active");
+            document.getElementById('chooseEmployee').classList.add('active');
+        }
+        if (window.location.href.includes("appointment")){
+            document.querySelector(".active").classList.remove("active");
+            document.getElementById('chooseAppointment').classList.add('active');
+        }
 
         
         
