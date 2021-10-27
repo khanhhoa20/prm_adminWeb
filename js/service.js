@@ -36,6 +36,8 @@ function renderServices(services) {
             <td>${service.price}</td>
             <td>${service.status}</td>
             <td>${service.discount}</td>
+            <td><a>Update</a></td>
+            <td><button>Remove</button></td>
         </tr> 
         `
 
