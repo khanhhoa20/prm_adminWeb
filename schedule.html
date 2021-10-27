@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="share/css/dashboard.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
+    <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -29,35 +32,73 @@
 
         <div class="home-content">
 
-            <div class="bg-white col-11 ms-5 p-3 shadow">
+
+            <div style="height: 25em;" class="col-11 ms-5 p-3 bg-white shadow parent">
+                <div class="mb-2 p-2">
+                    <h4 style="display: inline-block;">Schedule list</h4>
+                    <button id="myBtn" class="btn-create test"><i class="fa fa-plus"></i>&nbsp;&nbsp;New
+                        Schedule</button>
+                </div>
                 <table class="table ">
                     <thead>
                         <th>Schedule Id</th>
                         <th>Start time</th>
                         <th>End time</th>
                     </thead>
-                    <tbody class="table-data">
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                        </tr>
+                    <tbody id="table-data">
 
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
 
+            <button onclick="reload()">Reload</button>
         </div>
 
     </section>
 
+    <div id="myModal" class="modal">
+
+        <div style="width: 30em; left: 2em;" class="modal-content p-3">
+            <div class="mb-5">
+                <h4>New Schedule</h4>
+            </div>
+            <div class="col-12 mb-3">
+                <h6>Start time</h6>
+                <input type="text" id="start-time" class="form-control pointer bg-white" readonly>
+            </div>
+            <div class="col-12 mb-3">
+                <h6>Start time</h6>
+                <input type="text" id="end-time" class="form-control pointer bg-white" readonly>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-primary">Create</button>
+                <button style="float:right;" class="btn btn-white">Cancel</button>
+                
+            </div>
+        </div>
+
+    </div>
+
     <script src="/share/js/useSidebar.js"></script>
     <script src="js/schedule.js"></script>
+
+    <script>
+        var times = {};
+
+        var timepicker = new TimePicker(['start-time', 'end-time'], {
+            theme: 'blue',
+            lang: 'en'
+        });
+
+        timepicker.on('change', function (evt) {
+            var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+            evt.element.value = value + ':00';
+
+            var id = evt.element.id;
+            times[id] = value + ':00';
+        });
+    </script>
 
 </body>
 
