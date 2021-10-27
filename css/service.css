@@ -21,7 +21,7 @@
   } 
   .box-topic a{
     text-decoration: none;
-    color: #131211;
+    color: #145397;
 } 
 .home-content{
   padding-left: 1%;
@@ -31,6 +31,13 @@
 .table-boxes .boxTable .title{
   font-size: 22px;
   font-weight: 500;
-  color: #131211;
+  color: #111213;
   /* margin-bottom: 10px; */
+}
+.remove{
+  background-color: red;
+  border-radius: 4px;
+  height: 35px;
+  width: 85px;
+ 
 }
