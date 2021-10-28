@@ -7,7 +7,8 @@
     padding: 15px 14px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    margin-bottom: 3%;
+    margin-bottom: 2%;
+    margin-left: 19px;
    
   } 
   
@@ -21,7 +22,7 @@
   } 
   .box-topic a{
     text-decoration: none;
-    color: #131211;
+    color: blue;
 } 
 .home-content{
   padding-left: 1%;
@@ -31,6 +32,13 @@
 .table-boxes .boxTable .title{
   font-size: 22px;
   font-weight: 500;
-  color: #131211;
+  color: black;
   /* margin-bottom: 10px; */
+}
+.remove{
+  background-color: red;
+  border-radius: 4px;
+  height: 35px;
+  width: 85px;
+ 
 }
