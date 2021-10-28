@@ -50,13 +50,21 @@
                         <th>Schedule Id</th>
                         <th>Start time</th>
                         <th>End time</th>
-                        <th class="col-2">Update</th>
+                        <th class="col-1">Status</th>
+                        <th class="col-1">Remove</th>
+                        <th class="col-1">Update</th>
+                        <th class="col-1">Details</th>
                     </thead>
                     <tbody id="table-data">
-                        
+
                     </tbody>
                 </table>
-                <div id="loader" style="margin-left: 27em;" class="lds-ellipsis"><div class="loader-item"></div><div class="loader-item"></div><div class="loader-item"></div><div class="loader-item"></div></div>
+                <div id="loader" style="margin-left: 27em;" class="lds-ellipsis">
+                    <div class="loader-item"></div>
+                    <div class="loader-item"></div>
+                    <div class="loader-item"></div>
+                    <div class="loader-item"></div>
+                </div>
                 <!-- <button onclick="getPages(1)">click</button> -->
             </div>
 
@@ -65,22 +73,22 @@
             </div>
 
         </div>
-        
+
     </section>
 
     <div id="myModal" class="modal">
 
         <div style="width: 30em; left: 2em;" class="modal-content p-3">
-            
+
             <div class="mb-5">
                 <h4>New Schedule</h4>
             </div>
-            
+
             <div class="col-12 mb-3">
                 <h6>Start time</h6>
                 <input type="text" id="start-time" class="form-control pointer bg-white" readonly>
             </div>
-            
+
             <div class="col-12 mb-3">
                 <h6>End time</h6>
                 <input type="text" id="end-time" class="form-control pointer bg-white" readonly>
@@ -91,8 +99,9 @@
             </div>
 
             <div class="mt-1 mb-3">
-                <button class="btn btn-primary" onclick="checkScheduleRequirement('start-time', 'end-time', 'create-err', 'create')">Create</button>
-                <button style="float:right;" class="btn btn-white"onclick="hideCreateModal()">Cancel</button>
+                <button class="btn btn-primary"
+                    onclick="checkScheduleRequirement('start-time', 'end-time', 'create-err', 'create')">Create</button>
+                <button style="float:right;" class="btn btn-white" onclick="hideCreateModal()">Cancel</button>
 
             </div>
         </div>
@@ -102,16 +111,16 @@
     <div id="myModal-update" class="modal">
 
         <div style="width: 30em; left: 2em;" class="modal-content p-3">
-            
+
             <div class="mb-5">
                 <h4>Update Schedule</h4>
             </div>
-            
+
             <div class="col-12 mb-3">
                 <h6>Start time</h6>
                 <input type="text" id="start-time-update" class="form-control pointer bg-white" readonly>
             </div>
-            
+
             <div class="col-12 mb-3">
                 <h6>End time</h6>
                 <input type="text" id="end-time-update" class="form-control pointer bg-white" readonly>
@@ -123,9 +132,51 @@
 
             <div class="mt-1 mb-3">
                 <input id="schedule-id-update" type="hidden">
-                <button class="btn btn-primary" onclick="checkScheduleRequirement('start-time-update', 'end-time-update', 'update-err', 'update')">Update</button>
-                <button style="float:right;" class="btn btn-white"onclick="hideUpdateModal()">Cancel</button>
+                <button class="btn btn-primary"
+                    onclick="checkScheduleRequirement('start-time-update', 'end-time-update', 'update-err', 'update')">Update</button>
+                <button style="float:right;" class="btn btn-white" onclick="hideUpdateModal()">Cancel</button>
 
+            </div>
+        </div>
+
+    </div>
+
+    <div id="myModal-update-status" class="modal">
+
+        <div style="width: 25em; left: 5em;" class="modal-content p-3">
+
+            <div class="mb-4">
+                <h4>Message</h4>
+            </div>
+
+            <div class="mb-3">
+                <h5 id="modal-update-status-mess"></h5>
+            </div>
+
+            <div class="mt-1 mb-3">
+                <button id="btn-update-status" class="btn btn-primary">Ok</button>
+                <button style="float:right;" class="btn btn-white"
+                    onclick="document.getElementById('myModal-update-status').style.display = 'none' ">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="myModal-general" class="modal">
+
+        <div style="width: 25em; left: 5em;" class="modal-content p-3">
+
+            <div class="mb-4">
+                <h4>Message</h4>
+            </div>
+
+            <div class="mb-3">
+                <h5 id="modal-general-mess"></h5>
+            </div>
+
+            <div class="mt-1 mb-3">
+                <button style="float:right;" class="btn btn-primary" onclick="reload()">Ok</button>
             </div>
         </div>
 

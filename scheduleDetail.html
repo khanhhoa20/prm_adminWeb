@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Detail</title>
+
+
+    <!-- LOCAL CSS -->
+    <link rel="stylesheet" href="css/schedule.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="share/css/dashboard.css">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FONT-AWASOME CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+
+    </div>
+
+    <section class="home-section">
+
+        <nav id="thanhsearch">
+        </nav>
+
+        <div class="home-content">
+
+            <div style="display: block; float: left; min-height: 20em;" class="col-4 ms-5 p-3 bg-white shadow parent">
+
+
+                <div class="mb-2 p-2">
+                    <h4 style="display: block;">Schedule Details</h4>
+                </div>
+
+                <div id="schedule-data" class="p-2">
+                    
+                </div>
+
+                <div class="mb-2 px-2">
+                    <a class="btn btn-primary border" href="schedule.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                </div>
+
+            </div>
+
+            <div style="display: block; float: left; min-height: 20em;" class="col-7 ms-3 p-3 bg-white shadow parent">
+
+                <div class="mb-2 p-2">
+                    <h4 style="display: inline-block;">Employees using this schedule</h4>
+                </div>
+
+                <table class="table ">
+                    <thead>
+                        <th>EmpEmail</th>
+                        <th>EmpName</th>
+                        <th>Phone</th>
+                    </thead>
+                    <tbody id="table-data">
+
+                    </tbody>
+                </table>
+            </div>
+
+           
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <!-- LOCAL JS -->
+    <script src="/share/js/useSidebar.js"></script>
+    <script src="js/scheduleDetail.js"></script>
+
+</body>
+
+</html>

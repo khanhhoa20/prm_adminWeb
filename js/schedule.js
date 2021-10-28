@@ -6,6 +6,7 @@ var totalPages = 0;
 var url_getAllSchedule = 'https://hair-cut.herokuapp.com/api/schedules';
 var url_createSchedule = 'https://hair-cut.herokuapp.com/api/createSchedule';
 var url_updateSchedule = 'https://hair-cut.herokuapp.com/api/updateSchedule';
+var url_updateScheduleStatus = 'https://hair-cut.herokuapp.com/api/updateScheduleStatus';
 
 
 
@@ -17,23 +18,20 @@ function getAllScheduleView(data) {
     var PAGESIZE = 5;
     var page = 1;
     for (var i = 0; i < data.length; i++) {
-        if (i > 0 && i % PAGESIZE == 0)
+
+        if (i > 0 && i % PAGESIZE == 0) {
             page++;
-        if (page == 1) {
-            result += `<tr class="page-${page}">
-                    <td>${data[i].scheduleID}</td>
-                    <td>${getTimeString(data[i].startTime)}</td>
-                    <td>${getTimeString(data[i].endTime)}</td>
-                    <td><button class="btn btn-primary" onclick="showUpdateModal('${data[i].scheduleID}', '${getTimeString(data[i].startTime)}', '${getTimeString(data[i].endTime)}')">Update</button></td>
-                    </tr>`;
-        } else {
-            result += `<tr class="page-${page} hidden">
-                    <td>${data[i].scheduleID}</td>
-                    <td>${getTimeString(data[i].startTime)}</td>
-                    <td>${getTimeString(data[i].endTime)}</td>
-                    <td><button class="btn btn-primary" onclick="showUpdateModal('${data[i].scheduleID}', '${getTimeString(data[i].startTime)}', '${getTimeString(data[i].endTime)}')">Update</button></td>
-                    </tr>`;
         }
+
+        result += `<tr class="page-${page} ${page == 1 ? '' : 'hidden'}">
+                    <td>${data[i].scheduleID}</td>
+                    <td>${getTimeString(data[i].startTime)}</td>
+                    <td>${getTimeString(data[i].endTime)}</td>
+                    <td class="${data[i].status ? 'text-primary' : 'text-secondary'}">${data[i].status}</td>
+                    <td>${data[i].status ? `<button class="btn btn-danger" onclick ="showUpdateStatusModal('${data[i].scheduleID}', '${data[i].status}')">Remove</button>` : `<button class="btn btn-success"  onclick ="showUpdateStatusModal('${data[i].scheduleID}', '${data[i].status}')">Restore</button>`}</td>
+                    <td><button class="btn btn-primary" onclick="showUpdateModal('${data[i].scheduleID}', '${getTimeString(data[i].startTime)}', '${getTimeString(data[i].endTime)}')">Update</button></td>
+                    <td><a class="btn btn-light border" href="scheduleDetail.html?id=${data[i].scheduleID}">Details</a></td>
+                    </tr>`;
     }
     table_data.innerHTML += result;
 }
@@ -51,20 +49,20 @@ function displayPageNumber() {
 
 function displayPage(pageDisplayed) {
 
-        var pageDataDisplayed = document.getElementsByClassName('page-' + pageDisplayed);
-        for (var page of pageDataDisplayed) {
-            page.classList.remove('hidden');
-        }
+    var pageDataDisplayed = document.getElementsByClassName('page-' + pageDisplayed);
+    for (var page of pageDataDisplayed) {
+        page.classList.remove('hidden');
+    }
 
-        for (var i = 1; i <= totalPages; i++) {
-            if (i != pageDisplayed) {
-                console.log(pageDisplayed);
-                var pageData = document.getElementsByClassName('page-' + i);
-                for (var page of pageData) {
-                    page.classList.add('hidden');
-                }
+    for (var i = 1; i <= totalPages; i++) {
+        if (i != pageDisplayed) {
+            console.log(pageDisplayed);
+            var pageData = document.getElementsByClassName('page-' + i);
+            for (var page of pageData) {
+                page.classList.add('hidden');
             }
         }
+    }
 }
 
 
@@ -80,6 +78,11 @@ function getTimeString(str) {
     return splitDot[0];
 }
 
+
+function showGeneralModal(mess) {
+    document.getElementById('myModal-general').style.display = 'block';
+    document.getElementById('modal-general-mess').innerHTML = mess;
+}
 
 
 function showCreateModal() {
@@ -111,6 +114,21 @@ function showUpdateModal(scheduleId, startTime, endTime) {
 function hideUpdateModal() {
     document.getElementById('update-err').innerHTML = '';
     document.getElementById('myModal-update').style.display = 'none';
+}
+
+function showUpdateStatusModal(id, status) {
+    document.getElementById('btn-update-status').setAttribute('onclick', `updateScheduleStatus('${id}', '${status}')`);
+    if(status == 'true'){
+        document.getElementById('modal-update-status-mess').innerHTML = 'Remove this schedule';
+    }else if(status == 'false'){
+        document.getElementById('modal-update-status-mess').innerHTML = 'Restore this schedule';
+    }
+    document.getElementById('myModal-update-status').style.display = 'block';
+
+}
+
+function alertsm(id) {
+    alert(id);
 }
 
 function scheduleValidation(_start, _end, _mess) {
@@ -204,7 +222,8 @@ function createSchedule() {
 
     var _data = {
         startTime: _startTime,
-        endTime: _endTime
+        endTime: _endTime,
+        status: true
     }
 
 
@@ -222,7 +241,8 @@ function createSchedule() {
         })
         .then(function () {
             hideCreateModal();
-            reload();
+            // reload();
+            showGeneralModal('Create successful.');
         })
 }
 
@@ -256,7 +276,7 @@ function updateSchedule() {
         })
         .then(function () {
             hideUpdateModal();
-            reload();
+            showGeneralModal('Update successful');
         })
 }
 
@@ -279,13 +299,15 @@ function checkScheduleRequirement(_start, _end, _mess, _status) {
             if (!checkExisted && scheduleValid) {
                 if (_status == 'create') {
                     createSchedule();
-                    alert('ok');
                 } else if (_status == 'update') {
                     updateSchedule();
-                    alert('updated');
                 }
             }
         })
+}
+
+function removeSchedule() {
+
 }
 
 async function getPages() {
@@ -302,12 +324,34 @@ async function getPages() {
 }
 
 
+function updateScheduleStatus(id, status) {
+    var isStatus = status == 'true';
+    var _data = {
+        scheduleID: id
+    }
 
+    console.log(_data);
 
+    fetch(url_updateScheduleStatus, {
+        method: 'PUT',
+        headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(_data)
+    })
+        .then(res => res.status)
+        .then(data => {
+            if(data == 200 && isStatus){
+                showGeneralModal('Remove Successful');
+            }else if(data == 200 && !isStatus){
+                showGeneralModal('Restore Successful');
+            }else if(data == 409 && isStatus){
+                showGeneralModal('Cannot Remove. One or more employee is using this schedule.')
+            }
+        })
 
-
-
-
+}
 
 //EXECUTE
 getAllSchedule();
