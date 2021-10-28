@@ -1,5 +1,6 @@
 var token = sessionStorage.getItem('token');
 
+var totalPages = 0;
 
 //URL
 var url_getAllSchedule = 'https://hair-cut.herokuapp.com/api/schedules';
@@ -13,23 +14,58 @@ var url_updateSchedule = 'https://hair-cut.herokuapp.com/api/updateSchedule';
 function getAllScheduleView(data) {
     var table_data = document.getElementById('table-data');
     var result = '';
-    var PAGESIZE = 1;
+    var PAGESIZE = 5;
     var page = 1;
     for (var i = 0; i < data.length; i++) {
         if (i > 0 && i % PAGESIZE == 0)
             page++;
-        result += `<tr class="page-${page}">
+        if (page == 1) {
+            result += `<tr class="page-${page}">
                     <td>${data[i].scheduleID}</td>
                     <td>${getTimeString(data[i].startTime)}</td>
                     <td>${getTimeString(data[i].endTime)}</td>
                     <td><button class="btn btn-primary" onclick="showUpdateModal('${data[i].scheduleID}', '${getTimeString(data[i].startTime)}', '${getTimeString(data[i].endTime)}')">Update</button></td>
                     </tr>`;
+        } else {
+            result += `<tr class="page-${page} hidden">
+                    <td>${data[i].scheduleID}</td>
+                    <td>${getTimeString(data[i].startTime)}</td>
+                    <td>${getTimeString(data[i].endTime)}</td>
+                    <td><button class="btn btn-primary" onclick="showUpdateModal('${data[i].scheduleID}', '${getTimeString(data[i].startTime)}', '${getTimeString(data[i].endTime)}')">Update</button></td>
+                    </tr>`;
+        }
     }
     table_data.innerHTML += result;
 }
 
+function displayPageNumber() {
+    getPages().then(pages => {
+        var pageContainer = document.getElementById('page-number-container');
+        for (var i = 1; i <= pages; i++) {
+            pageContainer.innerHTML += `<button class="btn btn-primary me-1" onclick="displayPage('${i}')">${i}</button>`;
+        }
+    })
+}
 
 
+
+function displayPage(pageDisplayed) {
+
+        var pageDataDisplayed = document.getElementsByClassName('page-' + pageDisplayed);
+        for (var page of pageDataDisplayed) {
+            page.classList.remove('hidden');
+        }
+
+        for (var i = 1; i <= totalPages; i++) {
+            if (i != pageDisplayed) {
+                console.log(pageDisplayed);
+                var pageData = document.getElementsByClassName('page-' + i);
+                for (var page of pageData) {
+                    page.classList.add('hidden');
+                }
+            }
+        }
+}
 
 
 //UTIL
@@ -44,15 +80,7 @@ function getTimeString(str) {
     return splitDot[0];
 }
 
-function displayPage(pageclass, pages, pagepass) {
-    var displayingPage = document.getElementsByClassName('page-1');
 
-    for (i of displayingPage) {
-        s
-    }
-
-
-}
 
 function showCreateModal() {
     var modal = document.getElementById("myModal");
@@ -169,7 +197,7 @@ function getAllSchedule() {
 function createSchedule() {
     var startTime = document.getElementById('start-time');
     var endTime = document.getElementById('end-time');
-    
+
     var _startTime = convertTime(startTime.value);
     var _endTime = convertTime(endTime.value);
 
@@ -252,12 +280,25 @@ function checkScheduleRequirement(_start, _end, _mess, _status) {
                 if (_status == 'create') {
                     createSchedule();
                     alert('ok');
-                }else if(_status == 'update'){
+                } else if (_status == 'update') {
                     updateSchedule();
                     alert('updated');
                 }
             }
         })
+}
+
+async function getPages() {
+    var PAGESIZE = 5;
+    var pages = 0;
+    const res = await fetch(url_getAllSchedule, { method: 'GET', headers: { Authorization: token } });
+    const data = await res.json();
+    pages = (data.length - data.length % PAGESIZE) / PAGESIZE;
+    if (data.length % PAGESIZE != 0) {
+        pages++;
+    }
+    totalPages = pages;
+    return pages;
 }
 
 
@@ -270,3 +311,5 @@ function checkScheduleRequirement(_start, _end, _mess, _status) {
 
 //EXECUTE
 getAllSchedule();
+getPages();
+displayPageNumber();
