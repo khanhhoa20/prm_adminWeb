@@ -49,7 +49,8 @@ function renderServices(services) {
     // console.log(htmls);
     body.innerHTML += htmls.join(' ');
 }
-// createDialog();
+
+// createDialog() for removeService;
 function createDialog() {
     var myModal = `  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
