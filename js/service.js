@@ -49,59 +49,162 @@ function renderServices(services) {
     // console.log(htmls);
     body.innerHTML += htmls.join(' ');
 }
+// createDialog();
+function createDialog() {
+    var myModal = `  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="notRemove">No</button>
+                <button type="button" class="btn btn-primary" id="confirmRemove">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>`
+
+    $('body').append(myModal);
+
+    // $('#staticBackdrop').modal('show');
+
+
+}
 
 
 function handleRemoveService(serviceID) {
+    var bodyContent = document.querySelector('body').innerHTML;
+    if (bodyContent.includes("staticBackdrop")) {
+        $('#staticBackdrop').remove();
+    }
+    function removeService() {
+
+        const data = { 'serviceID': serviceID };
+
+        fetch('https://hair-cut.herokuapp.com/api/deleteService',
+
+            {
+                method: "post",
+                headers: {
+
+                    Authorization: sessionStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(data)
 
 
-    const data = { 'serviceID': serviceID };
-
-    fetch('https://hair-cut.herokuapp.com/api/deleteService',
-
-        {
-            method: "post",
-            headers: {
-
-                Authorization: sessionStorage.getItem('token'),
-                'Content-Type': 'application/json'
-
-            },
-            body: JSON.stringify(data)
-
-
-        }
-    )
-        .then(response => response.json())
-
-        // Displaying results to console
-        .then(function () {
-            var service = document.querySelector('.service-' + serviceID);
-            if (service) {
-                service.remove();
             }
-        });
+        )
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(function () {
+                var service = document.querySelector('.service-' + serviceID);
+                if (service) {
+                    service.remove();
+                }
+            });
+    }
+    createDialog();
+    $('#staticBackdrop').modal('show');
+    $('#confirmRemove').click(function () {
+        removeService();
+        $('#staticBackdrop').modal('hide')
+        // console.log(serviceID);
+
+    });
+
 
 }
-var modal = document.getElementById('modal');
-var showBtn = document.getElementById('show');
-var yesBtn = document.getElementById('yes');
-var noBtn = document.getElementById('no');
 
-// Setup an event listener for the show button.
-showBtn.addEventListener('click', function (e) {
-    e.preventDefault();
 
-    // Show the modal.
-    modal.showModal();
-});
+function handleRemoveService1(serviceID) {
 
-// Setup an event listener for the close button.
-yesBtn.addEventListener('click', function (e) {
-    // e.preventDefault();
 
-    // // Close the modal.
-    // modal.close();
+    Confirm('Remove Service',
+        'Do you want to remove this service?',
+        'Yes', 'No',
+        "http://127.0.0.1:5500/service.html");
 
-    console.log("yes");
 
-});
+
+    function Confirm(title, msg, $true, $false, $link) { /*change*/
+
+        var $content = "<div class='dialog-ovelay'>" +
+            "<div class='dialog'><header>" +
+            " <h3> " + title + " </h3> " +
+            "<i class='fa fa-close'></i>" +
+            "</header>" +
+            "<div class='dialog-msg'>" +
+            " <p> " + msg + " </p> " +
+            "</div>" +
+            "<footer>" +
+            "<div class='controls'>" +
+            " <button class='button button-danger doAction'>" + $true + "</button> " +
+            " <button class='button button-default cancelAction'>" + $false + "</button> " +
+            "</div>" +
+            "</footer>" +
+            "</div>" +
+            "</div>";
+
+        $('body').prepend($content);
+        $('.doAction').click(function () {
+            removeService();
+            $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+                $(this).remove();
+            });
+        });
+        $('.cancelAction, .fa-close').click(function () {
+            $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+                $(this).remove();
+            });
+        });
+
+    }
+
+
+
+
+
+
+    function removeService() {
+
+        const data = { 'serviceID': serviceID };
+
+        fetch('https://hair-cut.herokuapp.com/api/deleteService',
+
+            {
+                method: "post",
+                headers: {
+
+                    Authorization: sessionStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(data)
+
+
+            }
+        )
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(function () {
+                var service = document.querySelector('.service-' + serviceID);
+                if (service) {
+                    service.remove();
+                }
+            });
+    }
+
+}
+
