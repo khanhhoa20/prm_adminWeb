@@ -33,7 +33,7 @@ function renderServices(services) {
     var htmls = services.map(function (service) {
         return `
         <tr class="service-${service.serviceID}">
-            <th scope="row">${service.serviceID}</th>
+            <td>${service.serviceID}</td>
             <td>${service.serviceName}</td>
             <td>${service.durationTime}</td>
             <td>${service.price}</td>
@@ -127,84 +127,84 @@ function handleRemoveService(serviceID) {
 }
 
 
-function handleRemoveService1(serviceID) {
+// function handleRemoveService1(serviceID) {
 
 
-    Confirm('Remove Service',
-        'Do you want to remove this service?',
-        'Yes', 'No',
-        "http://127.0.0.1:5500/service.html");
-
-
-
-    function Confirm(title, msg, $true, $false, $link) { /*change*/
-
-        var $content = "<div class='dialog-ovelay'>" +
-            "<div class='dialog'><header>" +
-            " <h3> " + title + " </h3> " +
-            "<i class='fa fa-close'></i>" +
-            "</header>" +
-            "<div class='dialog-msg'>" +
-            " <p> " + msg + " </p> " +
-            "</div>" +
-            "<footer>" +
-            "<div class='controls'>" +
-            " <button class='button button-danger doAction'>" + $true + "</button> " +
-            " <button class='button button-default cancelAction'>" + $false + "</button> " +
-            "</div>" +
-            "</footer>" +
-            "</div>" +
-            "</div>";
-
-        $('body').prepend($content);
-        $('.doAction').click(function () {
-            removeService();
-            $(this).parents('.dialog-ovelay').fadeOut(500, function () {
-                $(this).remove();
-            });
-        });
-        $('.cancelAction, .fa-close').click(function () {
-            $(this).parents('.dialog-ovelay').fadeOut(500, function () {
-                $(this).remove();
-            });
-        });
-
-    }
+//     Confirm('Remove Service',
+//         'Do you want to remove this service?',
+//         'Yes', 'No',
+//         "http://127.0.0.1:5500/service.html");
 
 
 
+//     function Confirm(title, msg, $true, $false, $link) { /*change*/
+
+//         var $content = "<div class='dialog-ovelay'>" +
+//             "<div class='dialog'><header>" +
+//             " <h3> " + title + " </h3> " +
+//             "<i class='fa fa-close'></i>" +
+//             "</header>" +
+//             "<div class='dialog-msg'>" +
+//             " <p> " + msg + " </p> " +
+//             "</div>" +
+//             "<footer>" +
+//             "<div class='controls'>" +
+//             " <button class='button button-danger doAction'>" + $true + "</button> " +
+//             " <button class='button button-default cancelAction'>" + $false + "</button> " +
+//             "</div>" +
+//             "</footer>" +
+//             "</div>" +
+//             "</div>";
+
+//         $('body').prepend($content);
+//         $('.doAction').click(function () {
+//             removeService();
+//             $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+//                 $(this).remove();
+//             });
+//         });
+//         $('.cancelAction, .fa-close').click(function () {
+//             $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+//                 $(this).remove();
+//             });
+//         });
+
+//     }
 
 
 
-    function removeService() {
-
-        const data = { 'serviceID': serviceID };
-
-        fetch('https://hair-cut.herokuapp.com/api/deleteService',
-
-            {
-                method: "post",
-                headers: {
-
-                    Authorization: sessionStorage.getItem('token'),
-                    'Content-Type': 'application/json'
-
-                },
-                body: JSON.stringify(data)
 
 
-            }
-        )
-            .then(response => response.json())
 
-            // Displaying results to console
-            .then(function () {
-                var service = document.querySelector('.service-' + serviceID);
-                if (service) {
-                    service.remove();
-                }
-            });
-    }
+//     function removeService() {
 
-}
+//         const data = { 'serviceID': serviceID };
+
+//         fetch('https://hair-cut.herokuapp.com/api/deleteService',
+
+//             {
+//                 method: "post",
+//                 headers: {
+
+//                     Authorization: sessionStorage.getItem('token'),
+//                     'Content-Type': 'application/json'
+
+//                 },
+//                 body: JSON.stringify(data)
+
+
+//             }
+//         )
+//             .then(response => response.json())
+
+//             // Displaying results to console
+//             .then(function () {
+//                 var service = document.querySelector('.service-' + serviceID);
+//                 if (service) {
+//                     service.remove();
+//                 }
+//             });
+//     }
+
+// }
 

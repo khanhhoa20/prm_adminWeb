@@ -5,7 +5,7 @@
     width: calc(100% / 4 - 15px);
     background: rgb(255, 255, 255);
     padding: 15px 14px;
-    border-radius: 12px;
+    border-radius: 3px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     margin-bottom: 2%;
     margin-left: 19px;
@@ -35,10 +35,8 @@
   color: black;
   /* margin-bottom: 10px; */
 }
-.remove{
-  background-color: red;
-  border-radius: 4px;
-  height: 35px;
-  width: 85px;
- 
+
+#tableHeader th{
+  border-top: none;
+  
 }
