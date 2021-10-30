@@ -29,15 +29,18 @@ function getServices(callback) {
 
 function renderServices(services) {
     // console.log(services);
+
     var body = document.getElementById('tableServices');
     var htmls = services.map(function (service) {
+
         return `
         <tr class="service-${service.serviceID}">
             <td>${service.serviceID}</td>
             <td>${service.serviceName}</td>
             <td>${service.durationTime}</td>
             <td>${service.price}</td>
-            <!-- <td>${service.status}</td> -->
+            
+            <td>available</td>
             <td>${service.discount}</td>
             <td><a href="/updateService.html?id=${service.serviceID}">Update</a></td>
             <td><button onclick="handleRemoveService('${service.serviceID}')" type="button" class="btn btn-danger">Remove</button></td>
