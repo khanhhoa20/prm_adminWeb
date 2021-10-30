@@ -50,6 +50,21 @@ fetch('/share/dashboard.html')
 
 
 
+        if (window.location.href.includes("ervice")) {
+            document.querySelector(".dashboard").innerHTML = "Service";
+        }
+
+        if (window.location.href.includes("schedule")) {
+            document.querySelector(".dashboard").innerHTML = "Schedule";
+        }
+        if (window.location.href.includes("employee")) {
+            document.querySelector(".dashboard").innerHTML = "Employee";
+        }
+        if (window.location.href.includes("appointment")) {
+            document.querySelector(".dashboard").innerHTML = "Appointment";
+        }
+
+
         var script = document.createElement("script");  // create a script DOM node
         script.src = "/js/auth.js";  // set its src to the provided URL
 
