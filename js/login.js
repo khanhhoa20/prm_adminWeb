@@ -1,3 +1,5 @@
+sessionStorage.removeItem("role");
+sessionStorage.removeItem("token");
 function getDataFromAPI() {
 
     console.log('email', document.getElementById('email').value);
@@ -43,12 +45,12 @@ function getDataFromAPI() {
 
             )
             .then(data => {
-                if (data.status != true) { alert("Email/password not right"); } 
+                if (data.status != true) { alert("Email/password not right"); }
                 else {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("role", data.roleID);
 
-                    sessionStorage.setItem("user", JSON.stringify(data));
+                    // sessionStorage.setItem("user", JSON.stringify(data));
                     window.location.assign("service.html");
                 }
 
