@@ -37,11 +37,11 @@ function getService(callback) {
 
 }
 function renderService(service) {
-    console.log(service.discount);
+
     document.getElementById('serviceID').value = service.serviceID;
     document.getElementById('serviceName').value = service.serviceName;
     document.getElementById('price').value = service.price;
-    document.getElementById('discount').value = service.discount;
+    // document.getElementById('discount').value = service.discount;
     document.getElementById('durationTime').value = service.durationTime;
     document.getElementById('status').value = service.status;
 }
