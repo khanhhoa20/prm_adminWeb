@@ -1125,18 +1125,18 @@
 
 
 async function getEmployeesAndPaging() {
-    // const formData = new FormData();
-    // formData.append('roleID', 'st');
-    var x = await fetch('https://hair-cut.herokuapp.com/api/employees',
+    const formData = new FormData();
+    formData.append('roleID', 'st');
+    var x = await fetch('https://hair-cut.herokuapp.com/api/getEmployeeStatusTrue',
 
         {
-            method: "get",
+            method: "post",
             headers: {
 
                 Authorization: sessionStorage.getItem('token')
 
             },
-            // body: formData
+            body: formData
 
 
         }
