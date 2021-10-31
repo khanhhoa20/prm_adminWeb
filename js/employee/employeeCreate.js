@@ -1,7 +1,8 @@
 
 var date = new Date();
+console.log(date.toISOString().substring(0, 10));
 
-$('#hireDate').val(date.toLocaleDateString("en-GB"));
+$('#hireDate').val(date.toISOString().substring(0, 10));
 
 getScheduleID(renderForm);
 function getScheduleID(callback) {
@@ -55,57 +56,57 @@ function renderForm(schedules) {
 
 
 
-// window.addEventListener("load", function () {
-//     function sendData() {
+window.addEventListener("load", function () {
+    function sendData() {
 
-//         // Bind the FormData object and the form element
-//         const formData = new FormData(form);
-
-
-//         fetch('https://hair-cut.herokuapp.com/api/addNewEmployee',
-
-//             {
-//                 method: "post",
-//                 headers: {
-
-//                     Authorization: sessionStorage.getItem('token'),
-//                     'Content-Type': 'application/json'
-
-//                 },
-//                 body: JSON.stringify(Object.fromEntries(formData)),
+        // Bind the FormData object and the form element
+        const formData = new FormData(form);
 
 
-//             }
-//         )
-//             .then(response => response.status)
-//             .then(data => {
-//                 console.log(data);
-//                 if (data == 201) {
-//                     $('#successCreateEmployee').modal('show');
-//                 }
-//                 else {
-//                     if (data == 208) {
-//                         $('#failCreateExistedEmployee').modal('show');
-//                     }
-//                     else {
-//                         $('#failCreateEmployee').modal('show');
-//                     }
-//                 }
+        fetch('https://hair-cut.herokuapp.com/api/addNewEmployee',
+
+            {
+                method: "post",
+                headers: {
+
+                    Authorization: sessionStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(Object.fromEntries(formData)),
 
 
-//             });
+            }
+        )
+            .then(response => response.status)
+            .then(data => {
+                console.log(data);
+                if (data == 201) {
+                    $('#successCreateEmployee').modal('show');
+                }
+                else {
+                    if (data == 208) {
+                        $('#failCreateExistedEmployee').modal('show');
+                    }
+                    else {
+                        $('#failCreateEmployee').modal('show');
+                    }
+                }
 
 
-//     }
-//     // Access the form element...
-//     const form = document.getElementById("myForm");
-
-//     // ...and take over its submit event.
-//     form.addEventListener("submit", function (event) {
-//         event.preventDefault();
+            });
 
 
-//         sendData();
+    }
+    // Access the form element...
+    const form = document.getElementById("myForm");
 
-//     });
-// });
+    // ...and take over its submit event.
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+
+        sendData();
+
+    });
+});
