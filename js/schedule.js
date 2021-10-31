@@ -15,7 +15,7 @@ var url_updateScheduleStatus = 'https://hair-cut.herokuapp.com/api/updateSchedul
 function getAllScheduleView(data) {
     var table_data = document.getElementById('table-data');
     var result = '';
-    var PAGESIZE = 5;
+    var PAGESIZE = 10;
     var page = 1;
     for (var i = 0; i < data.length; i++) {
 
@@ -27,7 +27,6 @@ function getAllScheduleView(data) {
                     <td>${data[i].scheduleID}</td>
                     <td>${getTimeString(data[i].startTime)}</td>
                     <td>${getTimeString(data[i].endTime)}</td>
-                    <td class="${data[i].status ? 'text-primary' : 'text-secondary'}">${data[i].status}</td>
                     <td>${data[i].status ? `<button class="btn btn-danger" onclick ="showUpdateStatusModal('${data[i].scheduleID}', '${data[i].status}')">Remove</button>` : `<button class="btn btn-success"  onclick ="showUpdateStatusModal('${data[i].scheduleID}', '${data[i].status}')">Restore</button>`}</td>
                     <td><button class="btn btn-primary" onclick="showUpdateModal('${data[i].scheduleID}', '${getTimeString(data[i].startTime)}', '${getTimeString(data[i].endTime)}')">Update</button></td>
                     <td><a class="btn btn-light border" href="scheduleDetail.html?id=${data[i].scheduleID}">Details</a></td>
@@ -311,7 +310,7 @@ function removeSchedule() {
 }
 
 async function getPages() {
-    var PAGESIZE = 5;
+    var PAGESIZE = 10;
     var pages = 0;
     const res = await fetch(url_getAllSchedule, { method: 'GET', headers: { Authorization: token } });
     const data = await res.json();
