@@ -37,7 +37,7 @@ function getService(callback) {
 
 }
 function renderService(service) {
-
+    console.log(service.discount);
     document.getElementById('serviceID').value = service.serviceID;
     document.getElementById('serviceName').value = service.serviceName;
     document.getElementById('price').value = service.price;
@@ -52,7 +52,7 @@ window.addEventListener("load", function () {
         // Bind the FormData object and the form element
         const formData = new FormData(form);
 
-        console.log(JSON.stringify(Object.fromEntries(formData)));
+        // console.log(JSON.stringify(Object.fromEntries(formData)));
 
         fetch(updateService,
 
