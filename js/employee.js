@@ -1165,7 +1165,17 @@ function renderEmployees(employees) {
     // console.log(employees);
 
     // var body = document.getElementById('tableEmployees');
+
+
+
+
     var htmls = employees.map(function (employee) {
+
+
+
+
+
+
         var date = new Date(employee.hireDate);
         // console.log(date.toLocaleDateString("en-US"));
         return `
@@ -1173,7 +1183,7 @@ function renderEmployees(employees) {
             <td>${employee.empEmail}</td>
             <td>${employee.empName}</td>
             <td>${employee.phone}</td>
-            <td>${date.toLocaleDateString("en-GB")}</td>
+            <td>${date.toISOString().substring(0, 10)}</td>
             <td>${employee.status}</td>
             <td>${employee.seatNum}</td>
             <td>${employee.scheduleID}</td>
@@ -1186,10 +1196,13 @@ function renderEmployees(employees) {
 
 
     });
+
+
     // console.log(htmls.join(' '));
     return htmls.join(' ');
     // console.log(htmls);
     // body.innerHTML += htmls.join(' ');
 }
+
 
 

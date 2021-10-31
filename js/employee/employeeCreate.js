@@ -4,6 +4,8 @@ console.log(date.toISOString().substring(0, 10));
 
 $('#hireDate').val(date.toISOString().substring(0, 10));
 
+
+
 getScheduleID(renderForm);
 function getScheduleID(callback) {
     fetch('https://hair-cut.herokuapp.com​/api/availableSchedules',
@@ -54,13 +56,28 @@ function renderForm(schedules) {
 }
 
 
+function CutStringToGetScheduleID(str) {
+    var split = str.split(':');
 
+    return split[0];
+}
 
 window.addEventListener("load", function () {
+
     function sendData() {
+
+
 
         // Bind the FormData object and the form element
         const formData = new FormData(form);
+
+        if (formData.get("roleID") == "Staff")
+            formData.set("roleID", "st");
+        else formData.set("roleID", "ad");
+        var schesuleID = formData.get("scheduleID") + "";
+        formData.set("scheduleID", CutStringToGetScheduleID(schesuleID));
+        var date = new Date();
+        formData.set("hireDate", date.toISOString().substring(0, 10));
 
 
         fetch('https://hair-cut.herokuapp.com/api/addNewEmployee',
@@ -99,6 +116,7 @@ window.addEventListener("load", function () {
 
     }
     // Access the form element...
+
     const form = document.getElementById("myForm");
 
     // ...and take over its submit event.
@@ -109,4 +127,5 @@ window.addEventListener("load", function () {
         sendData();
 
     });
+
 });
