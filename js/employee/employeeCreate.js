@@ -106,8 +106,14 @@ window.addEventListener("load", function () {
                         $('#failCreateExistedEmployee').modal('show');
                     }
                     else {
-                        $('#failCreateEmployee').modal('show');
+                        if (data == 409) {
+                            $('#failCreateExistedSeatNumEmployee').modal('show');
+                        }
+                        else {
+                            $('#failCreateEmployee').modal('show');
+                        }
                     }
+
                 }
 
 
