@@ -42,7 +42,7 @@ function renderServices(services) {
             
             <td>available</td>
            
-            <td><a href="/updateService.html?id=${service.serviceID}">Update</a></td>
+            <td><a href="/serviceUpdate.html?id=${service.serviceID}">Update</a></td>
             <td><button onclick="handleRemoveService('${service.serviceID}')" type="button" class="btn btn-danger">Remove</button></td>
         </tr> 
         `
