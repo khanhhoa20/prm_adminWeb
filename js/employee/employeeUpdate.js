@@ -4,20 +4,28 @@ var url = new URL(url_string);
 // console.log(url);
 var id = url.searchParams.get("id");
 // console.log(id);
+start();
+function start() {
 
-getEmployee(renderEmployee);
+    getScheduleID(renderSchedulesToForm);
+    getEmployee(renderEmployeeToForm);
+
+}
+
 function getEmployee(callback) {
     const data = { 'empEmail': id };
-    fetch('https://hair-cut.herokuapp.com/api/updateEmployeeInfo',
+    let formData = new FormData();
+    formData.append('empEmail', id);
+    fetch('https://hair-cut.herokuapp.com/api/getEmployeeEmpEmail',
 
         {
-            method: "put",
+            method: "post",
             headers: {
 
                 Authorization: sessionStorage.getItem('token'),
-                'Content-Type': 'application/json'
+
             },
-            body: JSON.stringify(data)
+            body: formData
 
         }
     )
@@ -28,14 +36,18 @@ function getEmployee(callback) {
 
 }
 
-function renderEmployee(employee) {
+function renderEmployeeToForm(employee) {
+
 
     document.getElementById('empEmail').value = employee.empEmail;
     document.getElementById('empName').value = employee.empName;
     document.getElementById('phone').value = employee.phone;
-
+    // console.log(employee.scheduleID);
     document.getElementById('seatNum').value = employee.seatNum;
-    document.getElementById('selected').value = employee.scheduleID;
+
+    // $('.selectpicker').selectpicker('val', employee.scheduleID);
+
+
 }
 
 
@@ -44,7 +56,7 @@ function renderEmployee(employee) {
 
 
 
-getScheduleID(renderForm);
+
 function getScheduleID(callback) {
     fetch('https://hair-cut.herokuapp.com​/api/availableSchedules',
 
@@ -69,28 +81,33 @@ function getTimeString(str) {
     var splitDot = splitT[1].split('.');
     return splitDot[0];
 }
-function renderForm(schedules) {
+function renderSchedulesToForm(schedules) {
+    getEmployee(getScheduleOfEmployee);
+    function getScheduleOfEmployee(emp) {
 
-    var selectOption = document.getElementById('selectSchedule');
-    var htmls = schedules.map(function (schedule) {
 
-        return `
-            <option data-tokens="${getTimeString(schedule.startTime)}">
+
+        var selectOption = document.getElementById('selectSchedule');
+        var htmls = schedules.map(function (schedule) {
+
+            return `
+            <option value="${schedule.scheduleID}">
             ${schedule.scheduleID}: ${getTimeString(schedule.startTime)} - ${getTimeString(schedule.endTime)}</option>
 
         `
 
 
-    });
+        });
 
-    selectOption.innerHTML += htmls.join(' ');
+        selectOption.innerHTML += htmls.join(' ');
 
-    $("#selectSchedule").selectpicker("refresh");
+        $("#selectSchedule").selectpicker("refresh");
+        $('.selectpicker').selectpicker('val', emp.scheduleID);
 
 
-    // console.log(htmls.join(' '));
+        // console.log(selectOption);
 
-    // console.log(selectOption);
+    }
 }
 
 
@@ -100,25 +117,34 @@ function CutStringToGetScheduleID(str) {
     return split[0];
 }
 
+
 window.addEventListener("load", function () {
 
-    function sendData() {
 
 
+    function sendData(employee) {
+
+        // console.log(employee);
 
         // Bind the FormData object and the form element
         const formData = new FormData(form);
 
 
         var schesuleID = formData.get("scheduleID") + "";
+        console.log("form: " + schesuleID);
         formData.set("scheduleID", CutStringToGetScheduleID(schesuleID));
+        formData.append("password", employee.password);
+        formData.append("password", employee.password);
+        formData.append("roleID", employee.roleID);
+        formData.append("status", employee.status);
+        formData.append("hireDate", employee.hireDate);
+        formData.append("dismissDate", employee.dismissDate);
 
 
-
-        fetch('https://hair-cut.herokuapp.com/api/addNewEmployee',
+        fetch('https://hair-cut.herokuapp.com/api/updateEmployeeInfo',
 
             {
-                method: "post",
+                method: "put",
                 headers: {
 
                     Authorization: sessionStorage.getItem('token'),
@@ -133,15 +159,15 @@ window.addEventListener("load", function () {
             .then(response => response.status)
             .then(data => {
                 console.log(data);
-                if (data == 201) {
-                    $('#successCreateEmployee').modal('show');
+                if (data == 200) {
+                    $('#successUpdateEmployee').modal('show');
                 }
                 else {
                     if (data == 208) {
-                        $('#failCreateExistedEmployee').modal('show');
+                        $('#failUpdateExistedSeatNum').modal('show');
                     }
                     else {
-                        $('#failCreateEmployee').modal('show');
+                        $('#failUpdateEmployee').modal('show');
                     }
                 }
 
@@ -157,9 +183,9 @@ window.addEventListener("load", function () {
     // ...and take over its submit event.
     form.addEventListener("submit", function (event) {
         event.preventDefault();
+        getEmployee(sendData);
 
-
-        sendData();
+        // sendData();
 
     });
 
