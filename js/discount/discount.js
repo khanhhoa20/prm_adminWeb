@@ -1232,6 +1232,7 @@ function handleRemoveDiscount(discountCode) {
                 if (employee) {
 
                     employee.remove();
+                    getDiscountsAndPaging();
                 }
             });
     }

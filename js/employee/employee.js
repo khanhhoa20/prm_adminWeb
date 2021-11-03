@@ -1141,7 +1141,7 @@ async function getEmployeesAndPaging() {
 
         }
     );
-    var dataEmployee = await x.json()
+    var dataEmployee = await x.json();
     // console.log(dataEmployee);
     $('#hello').pagination({
         dataSource: dataEmployee,
@@ -1238,6 +1238,7 @@ function handleRemoveEmployee(empEmail) {
                 if (employee) {
 
                     employee.remove();
+                    getEmployeesAndPaging();
                 }
             });
     }
