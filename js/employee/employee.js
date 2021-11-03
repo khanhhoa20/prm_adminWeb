@@ -1184,7 +1184,7 @@ function renderEmployees(employees) {
             <td>${employee.empName}</td>
             <td>${employee.phone}</td>
             <td>${date.toISOString().substring(0, 10)}</td>
-            <td>${employee.status}</td>
+           
             <td>${employee.seatNum}</td>
             <td>${employee.scheduleID}</td>
 
@@ -1203,6 +1203,86 @@ function renderEmployees(employees) {
     // console.log(htmls);
     // body.innerHTML += htmls.join(' ');
 }
+function handleRemoveEmployee(empEmail) {
+    console.log(empEmail);
+    var bodyContent = document.querySelector('body').innerHTML;
+    if (bodyContent.includes("staticBackdrop")) {
+        $('#staticBackdrop').remove();
+    }
+    function removeService() {
+
+
+
+        // fetch('https://hair-cut.herokuapp.com/api/deleteService',
+
+        //     {
+        //         method: "post",
+        //         headers: {
+
+        //             Authorization: sessionStorage.getItem('token'),
+        //             'Content-Type': 'application/json'
+
+        //         },
+        //         body: JSON.stringify(employee)
+
+
+        //     }
+        // )
+        //     .then(response => response.json())
+
+        //     // Displaying results to console
+        //     .then(function () {
+        //         var employee = document.querySelector('.employee-' + employee.empEmail);
+        //         if (employee) {
+        //             employee.remove();
+        //         }
+        //     });
+    }
+    createDialog();
+    $('#staticBackdrop').modal('show');
+    $('#confirmRemove').click(function () {
+        removeService();
+        $('#staticBackdrop').modal('hide')
+        // console.log(serviceID);
+
+    });
+
+
+}
+
+// createDialog() for removeService;
+function createDialog() {
+    var myModal = `  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to remove this employee?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="confirmRemove">Yes</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="notRemove">No</button>
+                
+            </div>
+        </div>
+    </div>
+</div>`
+
+    $('body').append(myModal);
+
+    // $('#staticBackdrop').modal('show');
+
+
+}
+
+
+
 
 
 
