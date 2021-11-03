@@ -1,5 +1,5 @@
 //giao diện phần sidebar
-fetch('/share/dashboard.html')
+fetch('share/dashboard.html')
     .then(function (response) {
         // When the page is loaded convert it to text
         return response.text()
@@ -47,6 +47,10 @@ fetch('/share/dashboard.html')
             document.querySelector(".active").classList.remove("active");
             document.getElementById('chooseAppointment').classList.add('active');
         }
+        if (window.location.href.includes("discount")) {
+            document.querySelector(".active").classList.remove("active");
+            document.getElementById('chooseDiscount').classList.add('active');
+        }
 
 
 
@@ -62,6 +66,9 @@ fetch('/share/dashboard.html')
         }
         if (window.location.href.includes("appointment")) {
             document.querySelector(".dashboard").innerHTML = "Appointment";
+        }
+        if (window.location.href.includes("discount")) {
+            document.querySelector(".dashboard").innerHTML = "Discount";
         }
 
 

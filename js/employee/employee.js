@@ -1179,7 +1179,7 @@ function renderEmployees(employees) {
         var date = new Date(employee.hireDate);
         // console.log(date.toLocaleDateString("en-US"));
         return `
-        <tr class="employee-${employee.empEmail}">
+        <tr id="employee-${employee.empEmail}">
             <td>${employee.empEmail}</td>
             <td>${employee.empName}</td>
             <td>${employee.phone}</td>
@@ -1209,41 +1209,44 @@ function handleRemoveEmployee(empEmail) {
     if (bodyContent.includes("staticBackdrop")) {
         $('#staticBackdrop').remove();
     }
-    function removeService() {
+    function removeEmployee() {
+
+        let formData = new FormData();
+        formData.append('empEmail', empEmail);
+
+        fetch('https://hair-cut.herokuapp.com/api/removeEmployeeByEmpEmail',
+
+            {
+                method: "put",
+                headers: {
+
+                    Authorization: sessionStorage.getItem('token'),
 
 
-
-        // fetch('https://hair-cut.herokuapp.com/api/deleteService',
-
-        //     {
-        //         method: "post",
-        //         headers: {
-
-        //             Authorization: sessionStorage.getItem('token'),
-        //             'Content-Type': 'application/json'
-
-        //         },
-        //         body: JSON.stringify(employee)
+                },
+                body: formData
 
 
-        //     }
-        // )
-        //     .then(response => response.json())
+            }
+        )
+            .then(response => response.json())
 
-        //     // Displaying results to console
-        //     .then(function () {
-        //         var employee = document.querySelector('.employee-' + employee.empEmail);
-        //         if (employee) {
-        //             employee.remove();
-        //         }
-        //     });
+            // Displaying results to console
+            .then(function () {
+                var employee = document.getElementById('employee-' + empEmail);
+                // console.log(employee)
+                if (employee) {
+
+                    employee.remove();
+                }
+            });
     }
     createDialog();
     $('#staticBackdrop').modal('show');
     $('#confirmRemove').click(function () {
-        removeService();
+        removeEmployee();
         $('#staticBackdrop').modal('hide')
-        // console.log(serviceID);
+
 
     });
 
