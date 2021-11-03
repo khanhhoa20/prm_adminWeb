@@ -1218,7 +1218,9 @@ function handleRemoveService(serviceID) {
     }
     function removeService() {
 
-        const data = { 'serviceID': serviceID };
+        // const data = { 'serviceID': serviceID };
+        let formData = new FormData();
+        formData.append('serviceID', serviceID);
 
         fetch('https://hair-cut.herokuapp.com/api/deleteService',
 
@@ -1227,10 +1229,10 @@ function handleRemoveService(serviceID) {
                 headers: {
 
                     Authorization: sessionStorage.getItem('token'),
-                    'Content-Type': 'application/json'
+
 
                 },
-                body: JSON.stringify(data)
+                body: formData
 
 
             }
