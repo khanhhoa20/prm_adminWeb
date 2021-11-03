@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment</title>
+
+    <!-- LOCAL CSS -->
+    <link rel="stylesheet" href="css/schedule.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="share/css/dashboard.css">
+
+    <!-- FONT-AWASOME CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/schedule.css">
+
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+
+    </div>
+
+    <section class="home-section">
+        <nav id="thanhsearch">
+
+
+
+        </nav>
+
+        <div class="home-content">
+            <div style="display: block; float: left; min-height: 34em;" class="col-5 ms-5 p-3 bg-white shadow parent">
+
+                <div class="mb-2 p-2">
+                    <a class="btn btn-primary me-3" href="appointment-all.html">
+                        <i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to all appointment
+                    </a>
+                </div>
+
+                <div>
+
+                    <div class="mb-2 p-2">
+                        <h5>Appointment Detail</h5>
+                        <table class="table table-borderless">
+                            <thead>
+                                <th class="col-10">
+                                </th>
+                                <th></th>
+                            </thead>
+                            <tbody id="appointment-detail">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="display: block; float: left; min-height: 34em;" class="col-6 ms-4 p-3 bg-white shadow parent">
+                <div>
+                    <div class="mb-2 p-2">
+
+                        <table class="table border">
+                            <h5>Services</h5>
+                            <thead>
+                                <th>ServiceID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                            </thead>
+                            <tbody id="appointment-services">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="/share/js/useSidebar.js"></script>
+    <script src="js/appointment-detail.js"></script>
+
+</body>
+
+</html>
