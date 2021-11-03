@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discount</title>
     <link rel="stylesheet" href="share/css/dashboard.css">
+    <link rel="stylesheet" href="css/discount/discount.css">
+    <link rel="stylesheet" href="css/paging.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -30,14 +33,46 @@
         </nav>
 
         <div class="home-content">
-            <p>Hello</p>
-        </div>
+            <div class="box">
 
+                <div class="box-topic"><a href="discountCreate.html">Add new discount</a></div>
+
+            </div>
+
+            <div class="table-boxes">
+                <div class="recent-table boxTable">
+                    <div class="title">Discount List</div>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr id="tableHeader">
+                                <th scope="col" class="border-bottom border-dark">Discount Code</th>
+                                <th scope="col" class="border-bottom border-dark">Discount Name</th>
+                                <th scope="col" class="border-bottom border-dark">Value</th>
+
+                                <th scope="col" class="border-bottom border-dark">Start Date</th>
+
+                                <th scope="col" class="border-bottom border-dark">End Date</th>
+
+                                <th scope="col" class="border-bottom border-dark">Update</th>
+                                <th scope="col" class="border-bottom border-dark">Remove</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tableDiscounts">
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="hello"></div>
     </section>
 
+
     <script src="share/js/useSidebar.js"></script>
-    <!-- <script src="js/service.js"></script> -->
-    <!-- <script src="js/auth.js"></script> -->
+    <script src="js/discount/discount.js"></script>
 
 </body>
 

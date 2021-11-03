@@ -1,0 +1,42 @@
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 4 - 15px);
+    background: rgb(255, 255, 255);
+    padding: 15px 14px;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1.5%;
+    margin-left: 19px;
+   margin-top: -8px;
+  } 
+  
+ 
+
+
+
+  .box-topic{
+    font-size: 20px;
+    font-weight: 500;
+  } 
+  .box-topic a{
+    text-decoration: none;
+    color: blue;
+} 
+.home-content{
+  padding-left: 1%;
+  position: relative;
+} 
+
+.table-boxes .boxTable .title{
+  font-size: 22px;
+  font-weight: 500;
+  color: black;
+  /* margin-bottom: 10px; */
+}
+
+#tableHeader th{
+  border-top: none;
+  
+}
