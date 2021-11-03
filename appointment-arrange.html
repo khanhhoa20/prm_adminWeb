@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment</title>
+
+    <!-- LOCAL CSS -->
+    <link rel="stylesheet" href="css/schedule.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="share/css/dashboard.css">
+
+    <!-- FONT-AWASOME CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/schedule.css">
+
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+
+    </div>
+
+    <section class="home-section">
+        <nav id="thanhsearch">
+
+
+
+        </nav>
+
+        <div class="home-content">
+            <div style="display: block; float: left; min-height: 33em;" class="col-4 ms-5 p-3 bg-white shadow parent">
+
+                <div class="mb-2 p-2">
+                    <a class="btn btn-primary me-3" href="appointment.html">
+                        <i class="fa fa-clock-o"></i>&nbsp;&nbsp;On Process
+                    </a>
+                </div>
+
+                <div>
+
+                    <div class="mb-2 p-2">
+                        <table class="table table-borderless">
+                            <thead>
+                                <th class="col-3">
+                                    <h5>Appointment Detail</h5>
+                                </th>
+                                <th></th>
+                            </thead>
+                            <tbody id="appointment-detail">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="display: block; float: left; min-height: 33em;" class="col-6 ms-4 p-3 bg-white shadow parent">
+                <div>
+                    <div class="mb-2 p-2">
+
+                        <table class="table border">
+                            <h5>Services</h5>
+                            <thead>
+                                <th>ServiceID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                            </thead>
+                            <tbody id="appointment-services">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mb-2 p-2">
+                        <h6>Select Employee</h6>
+                        <select id="emp-select" class="form-select">
+                            <option value="" selected disabled>Select Employee</option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-2 p-2">
+                        <button id="btn-update-status-accept" style="float: right;" class="btn btn-success"
+                            onclick="checkEmployeeEmail()">Accept</button>
+                        <button id="btn-update-status-deny" class="btn btn-danger"
+                            onclick="document.getElementById('myModal-general').style.display = 'block'">Deny</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal-general" class="modal">
+
+            <div style="width: 40em; left: 5em;" class="modal-content p-3">
+    
+                <div class="mb-4">
+                    <h4>Enter reason for deny this appointment</h4>
+                    <select id="reason-select" class="form-select">
+                        <option value="There isn't any employee match for this appointment" selected>There isn't any employee match for this appointment</option>
+                        <option value="This is a spamming appointment" >This is a spamming appointment</option> 
+                    </select>
+                </div>
+    
+                <div class="mt-1 mb-3">
+                    <button class="btn btn-light" onclick="document.getElementById('myModal-general').style.display = 'none' ">Cancel</button>
+                    <button style="float:right;" class="btn btn-primary" onclick="updateAppointmentStatusDeny()">Ok</button>
+                </div>
+            </div>
+    
+        </div>
+
+    </section>
+
+    <script src="/share/js/useSidebar.js"></script>
+    <script src="js/appointment-arrange.js"></script>
+
+</body>
+
+</html>

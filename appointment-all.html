@@ -22,6 +22,17 @@
 </head>
 
 <body>
+
+    <style>
+        .text-accept{
+            color: limegreen;
+        }
+
+        .text-done{
+            color: blueviolet;
+        }
+    </style>
+
     <div class="sidebar" id="sidebar">
 
     </div>
@@ -37,13 +48,13 @@
             <div class="col-11 ms-5 p-3 bg-white shadow parent">
 
                 <div class="mb-2 p-2">
-                    <a class="btn btn-primary me-3" href="appointment.html">
+                    <a class="btn btn-light me-3" href="appointment.html">
                         <i class="fa fa-clock-o"></i>&nbsp;&nbsp;On Process
                     </a>
                     <a class="btn btn-light me-3" href="appointment-accepted.html">
                         <i class="fa fa-check"></i>&nbsp;&nbsp;Accepted
                     </a>
-                    <a class="btn btn-light me-3" href="appointment-all.html">
+                    <a class="btn btn-primary me-3" href="appointment-all.html">
                         <i class="fa fa-th-list"></i>&nbsp;&nbsp;All
                     </a>
                 </div>
@@ -54,18 +65,11 @@
                         <th class="col-3">CusEmail</th>
                         <th class="col-3">Time</th>
                         <th class="col-2">Price</th>
-                        <th class="col-1">Duration</th>
-                        <th class="col-2">Action</th>
+                        <th class="col-2">Status</th>
+                        <th class="col-1">Details</th>
                     </thead>
                     <tbody id="table-data">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+
                     </tbody>
                 </table>
                 <div id="loader" style="margin-left: 27em;" class="lds-ellipsis">
@@ -80,7 +84,7 @@
     </section>
 
     <script src="/share/js/useSidebar.js"></script>
-    <script src="/js/appointment.js"></script>
+    <script src="js/appointment-all.js"></script>
     <!-- <script src="js/service.js"></script> -->
     <!-- <script src="js/auth.js"></script> -->
 
