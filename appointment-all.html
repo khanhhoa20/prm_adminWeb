@@ -59,6 +59,15 @@
                     </a>
                 </div>
 
+                <div class="mb-2 p-2 row g-3">
+                        <div class="col-5">
+                          <input class="form-control" id="txtSearchByCusEmail" placeholder="Search by customer email">
+                        </div>
+                        <div class="col-auto">
+                          <button style="width: 4em;" class="btn btn-primary mb-3" onclick="searchAppointmentByCustomerEmail()"><i class="fa fa-search"></i></button>
+                        </div>
+                </div>
+
                 <table class="table ">
                     <thead>
                         <th class="col-1">Id</th>
@@ -72,6 +81,10 @@
 
                     </tbody>
                 </table>
+
+                <div id="page-number">
+                </div>
+
                 <div id="loader" style="margin-left: 27em;" class="lds-ellipsis">
                     <div class="loader-item"></div>
                     <div class="loader-item"></div>
