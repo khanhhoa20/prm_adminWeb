@@ -33,7 +33,7 @@ function getOnProcessAppointmentNotifiContentView(_data) {
         }
     }
     if (!isOnProcess) {
-        noti_content.innerHTML += '<div class="p-2 m-3 ">You don\'t have any upcoming appointment.</div>';
+        noti_content.innerHTML += '<div class="p-2 m-3 ">You don\'t have any new appointments.</div>';
     }
 
 
