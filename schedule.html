@@ -40,9 +40,16 @@
 
                 <div class="mb-2 p-2">
                     <h4 style="display: inline-block;">Schedule list</h4>
-                    <button id="myBtn" class="btn-create" onclick="showCreateModal()">
-                        <i class="fa fa-plus"></i>&nbsp;&nbsp;New Schedule
-                    </button>
+                    <span style="float: right;">
+                        <button id="removed-schedule" class="btn btn-light border p-2 me-2" onclick="displayRemovedSchedules()">
+                            <i class="fa fa-times"></i>
+                            Removed schedule
+                        </button>
+
+                        <button id="myBtn" class="btn btn-success p-2" onclick="showCreateModal()">
+                            <i class="fa fa-plus"></i>&nbsp;&nbsp;New Schedule
+                        </button>
+                    </span>
                 </div>
 
                 <table class="table ">
@@ -185,7 +192,8 @@
 
     <!-- LOCAL JS -->
     <script src="/share/js/useSidebar.js"></script>
-    <script src="js/schedule.js"></script>
+    <script src="js/schedule/schedule.js"></script>
+    <script src="js/schedule/schedule-removed.js"></script>
     <script src="js/notification.js"></script>
 
     <!-- TIME PICKER JS -->

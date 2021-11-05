@@ -41,11 +41,17 @@
                 </div>
 
                 <div id="schedule-data" class="p-2">
-                    
+
                 </div>
 
                 <div class="mb-2 px-2">
-                    <a class="btn btn-primary border" href="schedule.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <a class="btn btn-primary border" href="schedule.html"><i
+                            class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <button style="float: right;" class="btn btn-warning"
+                        onclick="document.getElementById('myModal-add-employee').style.display = 'block' , getEmployeeStatusTrue()">
+                        <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;&nbsp;
+                        Add employees
+                    </button>
                 </div>
 
             </div>
@@ -68,8 +74,32 @@
                 </table>
             </div>
 
-           
+            <div id="myModal-add-employee" class="modal">
 
+                <div style="width: 25em; left: 5em;" class="modal-content p-3">
+
+                    <div class="mb-4">
+                        <h4>Add Employee</h4>
+                    </div>
+
+                    <div id="check-container">
+
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 id="modal-general-mess"></h5>
+                    </div>
+
+                    <div class="mt-1 mb-3">
+                        <div class="btn btn-light border"
+                            onclick="document.getElementById('myModal-add-employee').style.display = 'none'">Cancel
+                        </div>
+                        <button style="float:right;" class="btn btn-primary"
+                            onclick="updateEmloyeeSchedule()">Ok</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </section>
@@ -80,7 +110,8 @@
 
     <!-- LOCAL JS -->
     <script src="/share/js/useSidebar.js"></script>
-    <script src="js/scheduleDetail.js"></script>
+    <script src="js/schedule/scheduleDetail.js"></script>
+    <script src="js/schedule/schedule-add-employee.js"></script>
     <script src="js/notification.js"></script>
 
 </body>
