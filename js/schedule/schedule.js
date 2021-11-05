@@ -23,7 +23,7 @@ function getAllScheduleView(data) {
             page++;
         }
 
-        result += `<tr class="page-${page} ${page == 1 ? '' : 'hidden'}">
+        result += `<tr class="page-${page} ${page == 1 ? '' : 'hidden'} ${data[i].status ? 'schedules-data' : 'removed schedules-data'}">
                     <td>${data[i].scheduleID}</td>
                     <td>${getTimeString(data[i].startTime)}</td>
                     <td>${getTimeString(data[i].endTime)}</td>

@@ -29,10 +29,17 @@ function getScheduleDetailView(data) {
 
 function getEmployeeByScheduleIdView(data) {
     var tableData = document.getElementById('table-data');
+    var hasEmployee = false;
     for (s of data) {
-        tableData.innerHTML += `<tr><td>${s.empEmail}</td>
+        if (s.status) {
+            tableData.innerHTML += `<tr><td class="emloyees-email" >${s.empEmail}</td>
                                 <td>${s.empName}</td>
                                 <td>${s.phone}</td><tr/>`;
+            hasEmployee = true;
+        }
+    }
+    if (!hasEmployee) {
+        tableData.innerHTML += `<tr><h5 class="mt-4">This Schedule isn't used by any employee</h5></tr>`;
     }
 }
 
@@ -81,10 +88,10 @@ function getEmployeeByScheduleId() {
     })
         .then(res => res)
         .then(data => {
-            
-            if(data.status == 200){
+
+            if (data.status == 200) {
                 return data.json();
-            }else if(data.status == 404){
+            } else if (data.status == 404) {
                 document.getElementById('table-data').innerHTML += `<tr><h5 class="mt-4">This Schedule isn't used by any employee</h5></tr>`;
                 throw new Error('No Employee');
             }
