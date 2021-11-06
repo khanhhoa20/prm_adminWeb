@@ -1,7 +1,7 @@
 
-getDiscountsAndPaging();
+getAvailableDiscountsAndPaging();
 
-async function getDiscountsAndPaging() {
+async function getAvailableDiscountsAndPaging() {
 
     var x = await fetch('https://hair-cut.herokuapp.com/api/getAvailableDiscounts',
 
@@ -17,15 +17,12 @@ async function getDiscountsAndPaging() {
 
         }
     );
-    var dataDiscounts = await x.json()
+    var dataDiscounts = [];
+    x.status == 200 ? dataDiscounts = await x.json() : '';
     // console.log(dataEmployee);
     $('#hello').pagination({
         dataSource: dataDiscounts,
-        pageSize: 20,
-        showGoInput: true,
-        showGoButton: true,
-        showPrevious: false,
-        showNext: false,
+        pageSize: 10,
         callback: function (data, pagination) {
             var html = renderDiscounts(data);
             $('#tableDiscounts').html(html);
@@ -33,6 +30,43 @@ async function getDiscountsAndPaging() {
     })
 
 
+}
+
+async function getDiableDiscountsAndPaging() {
+
+    var _response = await fetch('https://hair-cut.herokuapp.com/api/getDisableDiscounts',
+        {
+            method: "get",
+            headers: { Authorization: sessionStorage.getItem('token') },
+        });
+
+    var dataDiscounts = [];
+    _response.status == 200 ? dataDiscounts = await _response.json() : '';
+
+    $('#hello').pagination({
+        dataSource: dataDiscounts,
+        pageSize: 10,
+        callback: function (data, pagination) {
+            var html = renderDiscounts(data);
+            $('#tableDiscounts').html(html);
+        }
+    })
+
+}
+
+
+function changeDiscountsViews() {
+    var _discount_show = document.getElementById('discounts-show');
+
+    if (_discount_show.classList.contains('text-danger')) {
+        _discount_show.classList.replace('text-danger', 'text-success');
+        _discount_show.innerHTML = '<i class="fas fa-bars"></i>&ensp;Active discounts';
+        getDiableDiscountsAndPaging();
+    } else {
+        _discount_show.classList.replace('text-success', 'text-danger');
+        _discount_show.innerHTML = '<i class="fas fa-bars"></i>&ensp;Removed discounts';
+        getAvailableDiscountsAndPaging();
+    }
 }
 
 
@@ -60,8 +94,11 @@ function renderDiscounts(discounts) {
             <td>${endDate.toISOString().substring(0, 10)}</td>
           
 
-            <td><a href="discountUpdate.html?id=${discount.discountCode}">Update</a></td>
-            <td><button onclick="handleRemoveDiscount('${discount.discountCode}')" type="button" class="btn btn-danger">Remove</button></td>
+            <td><a ${!discount.status ? 'class="disabled text-secondary"' : ''} href="discountUpdate.html?id=${discount.discountCode}">Update</a></td>
+            ${discount.status ?
+                `<td><button onclick="return confirm('Remove this discount ?') ? handleRemoveDiscount('${discount.discountCode}') : '' " type="button" class="btn btn-danger">Remove</button></td>`
+                : `<td><button onclick="return confirm('Restore this discount ?') ? restoreDiscount('${discount.discountCode}') : '' " type="button" class="btn btn-success">Restore</button></td>`
+            }
         </tr> 
         `
 
@@ -74,87 +111,64 @@ function renderDiscounts(discounts) {
     // console.log(htmls);
     // body.innerHTML += htmls.join(' ');
 }
-function handleRemoveDiscount(discountCode) {
-    console.log(discountCode);
-    var bodyContent = document.querySelector('body').innerHTML;
-    if (bodyContent.includes("staticBackdrop")) {
-        $('#staticBackdrop').remove();
-    }
-    function removeDiscount() {
+function handleRemoveDiscount(_discountCode) {
 
-        let formData = new FormData();
-        formData.append('empEmail', empEmail);
+    var _data = {
+        discountCode: _discountCode,
+        startDate: new Date()
+    };
 
-        fetch('https://hair-cut.herokuapp.com/api/removeEmployeeByEmpEmail',
-
-            {
-                method: "put",
-                headers: {
-
-                    Authorization: sessionStorage.getItem('token'),
-
-
-                },
-                body: formData
-
-
+    fetch('https://hair-cut.herokuapp.com/api/discountCodeRemovable',
+        {
+            method: 'POST',
+            headers: { Authorization: sessionStorage.getItem('token'), 'Content-Type': 'application/json' },
+            body: JSON.stringify(_data)
+        })
+        .then(res => {
+            if (res.status == 409) {
+                alert('Couldn\'t remove this discount. One or more futute appointments is using this discount.')
+                return false;
+            } else {
+                return true;
             }
-        )
-            .then(response => response.json())
+        })
+        .then(check => check ? removeDiscount(_discountCode) : '')
+}
 
-            // Displaying results to console
-            .then(function () {
-                var employee = document.getElementById('employee-' + empEmail);
-                // console.log(employee)
-                if (employee) {
+function removeDiscount(_discountCode) {
 
-                    employee.remove();
-                    getDiscountsAndPaging();
-                }
-            });
-    }
-    createDialog();
-    $('#staticBackdrop').modal('show');
-    $('#confirmRemove').click(function () {
-        removeEmployee();
-        $('#staticBackdrop').modal('hide')
+    var _data = {
+        discountCode: _discountCode,
+        startDate: new Date()
+    };
 
-
-    });
-
+    fetch('https://hair-cut.herokuapp.com/api/removeDiscountByCode?discountCode=' + _discountCode,
+        {
+            method: 'POST',
+            headers: { Authorization: sessionStorage.getItem('token'), 'Content-Type': 'application/json' },
+        })
+        .then(alert('Removed.'))
+        .then(getAvailableDiscountsAndPaging());
 
 }
 
-// // createDialog() for removeService;
-// function createDialog() {
-//     var myModal = `  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-//     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-//     <div class="modal-dialog modal-dialog-centered">
-//         <div class="modal-content">
-//             <div class="modal-header">
-//                 <h5 class="modal-title" id="staticBackdropLabel">Message</h5>
-//                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//                     <span aria-hidden="true">&times;</span>
-//                 </button>
-//             </div>
-//             <div class="modal-body">
-//                 Do you want to remove this employee?
-//             </div>
-//             <div class="modal-footer">
-//             <button type="button" class="btn btn-danger" id="confirmRemove">Yes</button>
-//                 <button type="button" class="btn btn-success" data-dismiss="modal" id="notRemove">No</button>
+function restoreDiscount(_discountCode) {
 
-//             </div>
-//         </div>
-//     </div>
-// </div>`
+    var _data = {
+        discountCode: _discountCode,
+        startDate: new Date()
+    };
 
-//     $('body').append(myModal);
+    fetch('https://hair-cut.herokuapp.com/api/restoreDiscountByCode?discountCode=' + _discountCode,
+        {
+            method: 'POST',
+            headers: { Authorization: sessionStorage.getItem('token'), 'Content-Type': 'application/json' },
+        })
+        .then(alert('Restored.'))
+        .then(getDiableDiscountsAndPaging());
 
-//     // $('#staticBackdrop').modal('show');
+}
 
-
-// }
 
 
 

@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="css/discount/discount.css">
     <link rel="stylesheet" href="css/paging.css">
 
+    <!-- fontawesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -21,41 +25,66 @@
 </head>
 
 <body>
+
+    <style>
+        .box {
+            display: inline-block;
+        }
+
+        .box:hover {
+            text-decoration: none;
+        }
+
+        a {
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a.disabled {
+            pointer-events: none;
+            cursor: default;
+        }
+
+    </style>
+
     <div class="sidebar" id="sidebar">
 
     </div>
 
     <section class="home-section">
-        <nav id="thanhsearch">
-
-
-
-        </nav>
+        <nav id="thanhsearch"></nav>
 
         <div class="home-content">
-            <div class="box">
-
-                <div class="box-topic"><a href="discountCreate.html">Add new discount</a></div>
-
-            </div>
+            <a class="box" href="discountCreate.html">
+                <span class="box-topic"><i class="fas fa-plus"></i> Add new discount</span>
+            </a>
+            <a class="box" href="#" onclick="changeDiscountsViews()">
+                <span id="discounts-show" class="box-topic text-danger"><i class="fas fa-bars"></i>&ensp;Removed discounts</span>
+            </a>
 
             <div class="table-boxes">
                 <div class="recent-table boxTable">
-                    <div class="title">Discount List</div>
+                    <div class="mb-4">
+                        <h5>Discount list</h5>
+                    </div>
 
-                    <table class="table table-hover">
+                    <table class="table">
                         <thead>
                             <tr id="tableHeader">
-                                <th scope="col" class="border-bottom border-dark">Discount Code</th>
-                                <th scope="col" class="border-bottom border-dark">Discount Name</th>
-                                <th scope="col" class="border-bottom border-dark">Value</th>
+                                <th class="col-2">Discount Code</th>
+                                <th class="col-2">Discount Name</th>
+                                <th class="col-1">Value</th>
 
-                                <th scope="col" class="border-bottom border-dark">Start Date</th>
+                                <th class="col-2">Start Date</th>
 
-                                <th scope="col" class="border-bottom border-dark">End Date</th>
+                                <th class="col-2">End Date</th>
 
-                                <th scope="col" class="border-bottom border-dark">Update</th>
-                                <th scope="col" class="border-bottom border-dark">Remove</th>
+                                <th class="col-1">Update</th>
+                                <th class="col-2">Remove</th>
 
                             </tr>
                         </thead>
