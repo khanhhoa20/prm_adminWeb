@@ -57,14 +57,17 @@ async function getDiableDiscountsAndPaging() {
 
 function changeDiscountsViews() {
     var _discount_show = document.getElementById('discounts-show');
+    var _discount_list_title = document.getElementById('discount-list-title');
 
     if (_discount_show.classList.contains('text-danger')) {
         _discount_show.classList.replace('text-danger', 'text-success');
         _discount_show.innerHTML = '<i class="fas fa-bars"></i>&ensp;Active discounts';
+        _discount_list_title.innerHTML = 'Removed discount list';
         getDiableDiscountsAndPaging();
     } else {
         _discount_show.classList.replace('text-success', 'text-danger');
         _discount_show.innerHTML = '<i class="fas fa-bars"></i>&ensp;Removed discounts';
+        _discount_list_title.innerHTML = 'Available discount list';
         getAvailableDiscountsAndPaging();
     }
 }
@@ -94,7 +97,7 @@ function renderDiscounts(discounts) {
             <td>${endDate.toISOString().substring(0, 10)}</td>
           
 
-            <td><a ${!discount.status ? 'class="disabled text-secondary"' : ''} href="discountUpdate.html?id=${discount.discountCode}">Update</a></td>
+            <td><a class="${discount.status ? 'btn btn-primary' : 'btn btn-secondary disabled'}" href="discountUpdate.html?id=${discount.discountCode}">Update</a></td>
             ${discount.status ?
                 `<td><button onclick="return confirm('Remove this discount ?') ? handleRemoveDiscount('${discount.discountCode}') : '' " type="button" class="btn btn-danger">Remove</button></td>`
                 : `<td><button onclick="return confirm('Restore this discount ?') ? restoreDiscount('${discount.discountCode}') : '' " type="button" class="btn btn-success">Restore</button></td>`
