@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service</title>
+    <title>Removed Services</title>
     <link rel="stylesheet" href="share/css/dashboard.css">
-    <link rel="stylesheet" href="css/service.css">
+    <link rel="stylesheet" href="css/service/removeService.css">
     <link rel="stylesheet" href="css/paging.css">
-    <link rel="stylesheet" href="css/dialog.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -18,39 +17,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
-
     <div class="sidebar" id="sidebar">
 
     </div>
 
     <section class="home-section">
-        <nav id="thanhsearch"></nav>
+        <nav id="thanhsearch">
+
+
+
+        </nav>
 
         <div class="home-content">
-
-            <div class="box">
-
-                <div class="box-topic"><a href="serviceCreate.html">Add new service</a></div>
-
-            </div>
-            <div class="box">
-
-                <div class="box-topic"><a href="serviceRemove.html">View removed services</a></div>
-
-            </div>
-
-
-
-
             <div class="table-boxes">
                 <div class="recent-table boxTable">
-                    <div class="title">Service List</div>
-                    <!-- <br> -->
+                    <div class="title">Removed Service List</div>
+                    <br>
                     <table class="table table-hover">
                         <thead>
                             <tr id="tableHeader">
@@ -60,8 +45,8 @@
                                 <th scope="col" class="border-bottom border-dark">Price</th>
                                 <th scope="col" class="border-bottom border-dark">Status</th>
 
-                                <th scope="col" class="border-bottom border-dark">Update</th>
-                                <th scope="col" class="border-bottom border-dark">Remove</th>
+
+                                <th scope="col" class="border-bottom border-dark">Restore</th>
                             </tr>
                         </thead>
                         <tbody id="tableServices">
@@ -72,20 +57,16 @@
                 </div>
             </div>
         </div>
+
         <div id="hello"></div>
+        <div class="back">
+            <a href="/service.html"><button type="button" class="btn btn-primary ">Back</button></a>
+        </div>
     </section>
 
-
-
-
-    <script src="/share/js/useSidebar.js"></script>
+    <script src="share/js/useSidebar.js"></script>
     <script src="share/js/paging.js"></script>
-    <script src="js/service/service.js"></script>
-    <script src="js/notification.js"></script>
-
-
-
-
+    <script src="js/service/serviceRemove.js"></script>
 
 
 </body>
